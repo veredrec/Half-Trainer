@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <title>Half Trainer</title>
+  </head>
+  <body>
+    <h1 class="main-title">Half Trainer</h1>
+    <h2 class="sub-title">Set & Track Your Fitness Goals</h2>
+
+    <p class="prompt">Please enter the number of weeks you would like to train</p>
+    <input id="number" class="number" type="number" placeholder="e.g. 4" min="1" max="16">
+    <p class="prompt">If you have a specific goal, please add it here (up to 20 characters)</p>
+    <input id="goal" class="goal" type="text" placeholder="e.g. Half marathon">
+    <button id="submit" class="hide-element submit">Done</button>
+
+    <div id="table-container">
+      <table id="table" class="hide-element table"></table>
+    </div>
+
+    <h3 id="goalTitle" class="hide-element goal-title"></h3>
+
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
