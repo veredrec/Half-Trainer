@@ -9,6 +9,7 @@ $('#submit').on('click', function() {
   goal = $('#goal').val();
   if (number > 0) {
     setTable(number);
+    getInput();
   }
   if (goal.length > 0) {
     setGoal(goal);
@@ -28,7 +29,7 @@ function setTable(number) {
       container.append(
         "<td class='box'>Day " +
           Number(x + counter) +
-          "<input id='dailyGoal' class='daily-goal' type='text' placeholder='Daily Goal' onkeydown='getInput(this)'></td>"
+          "<input class='daily-goal' type='text' placeholder='Daily Goal'><p class='hide-element'></p></td>"
       );
       $('#table').append(container); // append week to table
     }
@@ -53,9 +54,18 @@ $('#number, #goal').on('click', function() {
 });
 
 // set daily goals
-function getInput(userInput) {
-  if (event.key === 'Enter') {
-    var goal = userInput.value;
-    console.log(this);
-  }
+
+function getInput() {
+  $('.daily-goal').keydown(function(event) {
+    if (event.which == 13) {
+      event.preventDefault();
+      var goal = $(this).val();
+      $(this)
+        .next('p')
+        .text(goal)
+        .removeClass('hide-element')
+        .addClass('show-element');
+      $(this).addClass('hide-element');
+    }
+  });
 }
