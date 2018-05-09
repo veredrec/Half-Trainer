@@ -9,6 +9,7 @@ $('#submit').on('click', function() {
   goal = $('#goal').val();
   if (number > 0) {
     setTable(number);
+    getInput();
   }
   if (goal.length > 0) {
     setGoal(goal);
@@ -17,7 +18,7 @@ $('#submit').on('click', function() {
 // 2. Set table
 function setTable(number) {
   $('#table').remove(); // remove table if exists
-  $('#table-container').append('<table id="table">'); // create new table
+  $('#table-container').append('<table id="table" class="table">'); // create new table
   var counter = 1;
   var container;
   for (var i = 0; i < number; i++) {
@@ -28,7 +29,7 @@ function setTable(number) {
       container.append(
         "<td class='box'>Day " +
           Number(x + counter) +
-          "<input id='dailyGoal' class='daily-goal' type='text' placeholder='Daily Goal' onkeydown='getInput(this)'></td>"
+          "<input class='daily-goal' type='text' placeholder='Daily Goal'><p class='p-goal hide-element'></p></td>"
       );
       $('#table').append(container); // append week to table
     }
@@ -53,9 +54,25 @@ $('#number, #goal').on('click', function() {
 });
 
 // set daily goals
-function getInput(userInput) {
-  if (event.key === 'Enter') {
-    var goal = userInput.value;
-    console.log(this);
-  }
+function getInput() {
+  $('.daily-goal').keydown(function(event) {
+    if (event.which == 13) {
+      event.preventDefault();
+      var goal = $(this).val();
+      if (goal.length > 15) {
+        $('#message').text(
+          'Please describe your goal in less than 15 characters'
+        );
+      }
+      $(this)
+        .next('p')
+        .text(goal)
+        .removeClass('hide-element')
+        .addClass('show-element');
+      $(this).addClass('hide-element');
+    }
+  });
 }
+
+// add messages for input and then hide message
+// design
