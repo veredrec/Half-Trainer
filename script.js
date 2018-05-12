@@ -9,6 +9,7 @@ $('#submit').on('click', function() {
   goal = $('#goal').val();
   if (number > 0) {
     setTable(number);
+    createObject(number);
     getInput();
   }
   if (goal.length > 0) {
@@ -47,6 +48,25 @@ function setGoal(goal) {
   $('#goalTitle').removeClass('hide-element');
 }
 
+// 4. create object with number of weeks
+function createObject(number) {
+  var weeksObject = {};
+  for (var i = 0; i < number; i++) {
+    weeksObject['week' + i] = {
+      day1: true,
+      day2: true,
+      day3: true,
+      day4: true,
+      day5: true,
+      day6: true,
+      day7: true
+    };
+  }
+  console.log(weeksObject);
+  var weeksCount = Object.keys(weeksObject).length;
+  console.log(weeksCount);
+}
+
 // Show and hide submit button
 $('#number, #goal').on('click', function() {
   $('#submit').addClass('show-element');
@@ -74,5 +94,22 @@ function getInput() {
   });
 }
 
+// TODO:
+// Local Storage - to store all user input
+// send data to local storage
+function storeWeeks(num) {
+  storedData = localStorage.setItem('num', JSON.stringify(num));
+}
+
+// retrieve data from local storage
+// function getWeeks() {
+//   if (!localStorage.getItem('num')) {
+//     console.log('no fitness goals yet!');
+//     // show option to add goals
+//   } else {
+//     num = JSON.parse(localStorage.getItem('num'));
+//     showHabits(num);
+//   }
+// }
 // add messages for input and then hide message
 // design
